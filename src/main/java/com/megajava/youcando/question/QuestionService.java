@@ -1,17 +1,22 @@
 package com.megajava.youcando.question;
 
+import com.megajava.youcando.group.GroupRepository;
 import com.megajava.youcando.user.UserDTO;
 import com.megajava.youcando.user.UserRepository;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 public class QuestionService {
     private final UserDTO user;
     private final UserRepository userRepository;
+    private final GroupRepository groupRepository;
 
-    public QuestionService(UserDTO user, UserRepository userRepository) {
+    public QuestionService(UserDTO user, UserRepository userRepository, GroupRepository groupRepository) {
         this.user = user;
         this.userRepository = userRepository;
+        this.groupRepository = groupRepository;
     }
 
     public void checkEI(String answer) {
@@ -46,6 +51,7 @@ public class QuestionService {
         }
     }
 
+    @Transactional
     public String mbtiresultMapping() {
         int e = user.geteCount();
         int i = user.getiCount();
@@ -64,14 +70,14 @@ public class QuestionService {
         String mbti = resultEI + resultNS + resultTF + resultPJ;
         String finalResult = setFinalResult(mbti);
 
-        userRepository.setResult(finalResult);
+        userRepository.setGroupId(finalResult);
 
         return finalResult;
     }
 
     public String resultMapping(String mbtiResult) {
         String finalResult = setFinalResult(mbtiResult);
-        userRepository.setResult(finalResult);
+        userRepository.setGroupId(finalResult);
 
         return finalResult;
     }

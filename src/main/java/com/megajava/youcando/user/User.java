@@ -1,17 +1,24 @@
 package com.megajava.youcando.user;
 
+import com.megajava.youcando.group.Group;
+import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "user")
+@Getter
+@Setter
 public class User {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String result;
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group groupId;
 
     public int getId() {
         return id;
@@ -21,11 +28,12 @@ public class User {
         this.id = id;
     }
 
-    public String getResult() {
-        return result;
+    public Group getGroupId() {
+        return groupId;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setGroupId(Group groupId) {
+        this.groupId = groupId;
     }
+// 추가 필드 및 메서드를 정의할 수 있습니다.
 }
