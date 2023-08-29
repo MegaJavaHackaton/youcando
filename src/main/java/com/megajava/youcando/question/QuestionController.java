@@ -35,6 +35,8 @@ public class QuestionController {
     public String resultPage(@RequestParam("answer") String answer) {
         questionService.checkPJ(answer);
         questionService.resultMapping();
+
+        return "/result";
     }
 
 }
