@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/megajava
     username: root
-    password: 1234
+    password: lhj7057
 
   # JPA config
   jpa:
@@ -13,8 +13,8 @@ spring:
     database: mysql
     properties:
       hibernate:
-        ddl-auto: create
+        ddl-auto: none
         format_sql: true
 
 server:
-  port: 8001
+  port: 8006
