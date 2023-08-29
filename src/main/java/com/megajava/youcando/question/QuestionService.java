@@ -46,7 +46,7 @@ public class QuestionService {
         }
     }
 
-    public void resultMapping() {
+    public String resultMapping() {
         int e = user.geteCount();
         int i = user.getiCount();
         int n = user.getnCount();
@@ -65,6 +65,8 @@ public class QuestionService {
         String finalResult = setFinalResult(mbti);
 
         userRepository.setResult(finalResult);
+
+        return finalResult;
     }
 
     private String setFinalResult(String mbti) {
