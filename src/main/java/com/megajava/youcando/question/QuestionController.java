@@ -1,5 +1,7 @@
 package com.megajava.youcando.question;
 
+import com.megajava.youcando.gamerecommendation.GameRecommendationDTO;
+import com.megajava.youcando.gamerecommendation.GameRecommendationService;
 import com.megajava.youcando.user.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import java.util.Map;
 public class QuestionController {
     private final UserDTO user;
     private final QuestionService questionService;
+    private final GameRecommendationService recommendationService;
 
     @GetMapping("/question")
     public String firstQ() {
@@ -61,9 +64,20 @@ public class QuestionController {
             }
         }
 
-        questionService.resultMapping();
+        String mbtiResult = questionService.mbtiresultMapping();
 
+        GameRecommendationDTO gameRecommendations = recommendationService.getRecommendedGamesByMBTI(mbtiResult);
         return ResponseEntity.ok("redirect:/result");
     }
+
+//    private String calculateMBTIResult(Map<String, String> selectedValues) {
+//        StringBuilder mbtiResult = new StringBuilder();
+//
+//        mbtiResult.append(selectedValues.get("q1"));
+//        mbtiResult.append(selectedValues.get("q2"));
+//        // 나머지 질문에 대한 선택 값들도 추가
+//
+//        return mbtiResult.toString();
+//    }
 
 }

@@ -46,7 +46,7 @@ public class QuestionService {
         }
     }
 
-    public String resultMapping() {
+    public String mbtiresultMapping() {
         int e = user.geteCount();
         int i = user.getiCount();
         int n = user.getnCount();
@@ -64,6 +64,13 @@ public class QuestionService {
         String mbti = resultEI + resultNS + resultTF + resultPJ;
         String finalResult = setFinalResult(mbti);
 
+        userRepository.setResult(finalResult);
+
+        return finalResult;
+    }
+
+    public String resultMapping(String mbtiResult) {
+        String finalResult = setFinalResult(mbtiResult);
         userRepository.setResult(finalResult);
 
         return finalResult;
@@ -114,7 +121,5 @@ public class QuestionService {
     public String checkType(int a, int b) {
         return (a > b) ? String.valueOf(a) : String.valueOf(b);
     }
-
-
 
 }
