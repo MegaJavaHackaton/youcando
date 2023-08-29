@@ -1,14 +1,17 @@
 package com.megajava.youcando.question;
 
 import com.megajava.youcando.user.UserDTO;
+import com.megajava.youcando.user.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionService {
     private final UserDTO user;
+    private final UserRepository userRepository;
 
-    public QuestionService(UserDTO user) {
+    public QuestionService(UserDTO user, UserRepository userRepository) {
         this.user = user;
+        this.userRepository = userRepository;
     }
 
     public void checkEI(String answer) {
@@ -59,37 +62,51 @@ public class QuestionService {
         String resultPJ = checkType(p, j);
 
         String mbti = resultEI + resultNS + resultTF + resultPJ;
-        String finalResult;
+        String finalResult = setFinalResult(mbti);
 
+        userRepository.setResult(finalResult);
+    }
+
+    private String setFinalResult(String mbti) {
+        String finalResult;
         switch (mbti) {
             case "intp":
             case "istp":
                 finalResult = "A";
+                break;
             case "infp":
             case "isfp":
                 finalResult = "B";
+                break;
             case "entp":
             case "estp":
                 finalResult = "C";
+                break;
             case "enfp":
             case "esfp":
                 finalResult = "D";
+                break;
             case "estj":
             case "entj":
                 finalResult = "E";
+                break;
             case "infj":
             case "isfj":
                 finalResult = "F";
+                break;
             case "istj":
             case "intj":
                 finalResult = "G";
+                break;
             case "enfj":
             case "esfj":
                 finalResult = "H";
-
+                break;
+            default:
+                finalResult = "Unknown";
+                break;
         }
-
-
+        return finalResult;
     }
 
     public String checkType(int a, int b) {
