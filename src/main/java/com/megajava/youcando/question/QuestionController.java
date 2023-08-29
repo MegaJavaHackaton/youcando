@@ -64,20 +64,20 @@ public class QuestionController {
             }
         }
 
-        String mbtiResult = calculateMBTIResult(selectedValues);
+        String mbtiResult = questionService.mbtiresultMapping();
 
         GameRecommendationDTO gameRecommendations = recommendationService.getRecommendedGamesByMBTI(mbtiResult);
         return ResponseEntity.ok("redirect:/result");
     }
 
-    private String calculateMBTIResult(Map<String, String> selectedValues) {
-        StringBuilder mbtiResult = new StringBuilder();
-
-        mbtiResult.append(selectedValues.get("q1"));
-        mbtiResult.append(selectedValues.get("q2"));
-        // 나머지 질문에 대한 선택 값들도 추가
-
-        return mbtiResult.toString();
-    }
+//    private String calculateMBTIResult(Map<String, String> selectedValues) {
+//        StringBuilder mbtiResult = new StringBuilder();
+//
+//        mbtiResult.append(selectedValues.get("q1"));
+//        mbtiResult.append(selectedValues.get("q2"));
+//        // 나머지 질문에 대한 선택 값들도 추가
+//
+//        return mbtiResult.toString();
+//    }
 
 }

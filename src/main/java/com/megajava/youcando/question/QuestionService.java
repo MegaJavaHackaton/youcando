@@ -46,28 +46,28 @@ public class QuestionService {
         }
     }
 
-//    public String resultMapping() {
-//        int e = user.geteCount();
-//        int i = user.getiCount();
-//        int n = user.getnCount();
-//        int s = user.getsCount();
-//        int t = user.gettCount();
-//        int f = user.getfCount();
-//        int p = user.getpCount();
-//        int j = user.getjCount();
-//
-//        String resultEI = checkType(e, i);
-//        String resultNS = checkType(n, s);
-//        String resultTF = checkType(t, f);
-//        String resultPJ = checkType(p, j);
-//
-//        String mbti = resultEI + resultNS + resultTF + resultPJ;
-//        String finalResult = setFinalResult(mbti);
-//
-//        userRepository.setResult(finalResult);
-//
-//        return finalResult;
-//    }
+    public String mbtiresultMapping() {
+        int e = user.geteCount();
+        int i = user.getiCount();
+        int n = user.getnCount();
+        int s = user.getsCount();
+        int t = user.gettCount();
+        int f = user.getfCount();
+        int p = user.getpCount();
+        int j = user.getjCount();
+
+        String resultEI = checkType(e, i);
+        String resultNS = checkType(n, s);
+        String resultTF = checkType(t, f);
+        String resultPJ = checkType(p, j);
+
+        String mbti = resultEI + resultNS + resultTF + resultPJ;
+        String finalResult = setFinalResult(mbti);
+
+        userRepository.setResult(finalResult);
+
+        return finalResult;
+    }
 
     public String resultMapping(String mbtiResult) {
         String finalResult = setFinalResult(mbtiResult);
